@@ -4,7 +4,7 @@
 #
 Name     : upower
 Version  : 0.99.4
-Release  : 2
+Release  : 3
 URL      : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Source0  : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Summary  : UPower is a system daemon for managing power devices
@@ -113,7 +113,7 @@ rm -rf %{buildroot}
 %make_install
 %find_lang upower
 ## make_install_append content
-mv %{buildroot}/etc/* %{buildroot}/usr/share/. && rmdir %{buildroot}/etc
+mv %{buildroot}/etc/UPower %{buildroot}/usr/share/. && mv %{buildroot}/etc/dbus-1/system.d %{buildroot}/usr/share/dbus-1/. && rmdir %{buildroot}/etc/dbus-1 && rmdir %{buildroot}/etc
 ## make_install_append end
 
 %files
@@ -139,6 +139,7 @@ mv %{buildroot}/etc/* %{buildroot}/usr/share/. && rmdir %{buildroot}/etc
 /usr/share/dbus-1/interfaces/org.freedesktop.UPower.Wakeups.xml
 /usr/share/dbus-1/interfaces/org.freedesktop.UPower.xml
 /usr/share/dbus-1/system-services/org.freedesktop.UPower.service
+/usr/share/dbus-1/system.d/org.freedesktop.UPower.conf
 
 %files dev
 %defattr(-,root,root,-)
