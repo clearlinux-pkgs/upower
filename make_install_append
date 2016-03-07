@@ -1,1 +1,1 @@
-mv %{buildroot}/etc/* %{buildroot}/usr/share/. && rmdir %{buildroot}/etc
+mv %{buildroot}/etc/UPower %{buildroot}/usr/share/. && mv %{buildroot}/etc/dbus-1/system.d %{buildroot}/usr/share/dbus-1/. && rmdir %{buildroot}/etc/dbus-1 && rmdir %{buildroot}/etc
