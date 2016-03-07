@@ -4,7 +4,7 @@
 #
 Name     : upower
 Version  : 0.99.4
-Release  : 1
+Release  : 2
 URL      : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Source0  : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Summary  : UPower is a system daemon for managing power devices
@@ -30,6 +30,7 @@ BuildRequires : pkgconfig(libusb-1.0)
 BuildRequires : pkgconfig(systemd)
 BuildRequires : pkgconfig(udev)
 BuildRequires : systemd-dev
+Patch1: 0001-Support-an-entirely-stateless-configuration.patch
 
 %description
 ===============
@@ -101,6 +102,7 @@ locales components for the upower package.
 
 %prep
 %setup -q -n upower-0.99.4
+%patch1 -p1
 
 %build
 %configure --disable-static --disable-man-pages
@@ -110,6 +112,9 @@ make V=1  %{?_smp_mflags}
 rm -rf %{buildroot}
 %make_install
 %find_lang upower
+## make_install_append content
+mv %{buildroot}/etc/* %{buildroot}/usr/share/. && rmdir %{buildroot}/etc
+## make_install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -128,6 +133,7 @@ rm -rf %{buildroot}
 
 %files data
 %defattr(-,root,root,-)
+/usr/share/UPower/UPower.conf
 /usr/share/dbus-1/interfaces/org.freedesktop.UPower.Device.xml
 /usr/share/dbus-1/interfaces/org.freedesktop.UPower.KbdBacklight.xml
 /usr/share/dbus-1/interfaces/org.freedesktop.UPower.Wakeups.xml
