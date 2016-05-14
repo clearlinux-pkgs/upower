@@ -4,7 +4,7 @@
 #
 Name     : upower
 Version  : 0.99.4
-Release  : 5
+Release  : 6
 URL      : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Source0  : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Summary  : UPower is a system daemon for managing power devices
@@ -17,6 +17,8 @@ Requires: upower-locales
 Requires: upower-config
 BuildRequires : docbook-xml
 BuildRequires : gettext
+BuildRequires : gobject-introspection
+BuildRequires : gobject-introspection-dev
 BuildRequires : gtk-doc
 BuildRequires : gtk-doc-dev
 BuildRequires : intltool
@@ -140,6 +142,7 @@ mv %{buildroot}/etc/UPower %{buildroot}/usr/share/. && mv %{buildroot}/etc/dbus-
 /usr/share/dbus-1/interfaces/org.freedesktop.UPower.xml
 /usr/share/dbus-1/system-services/org.freedesktop.UPower.service
 /usr/share/dbus-1/system.d/org.freedesktop.UPower.conf
+/usr/share/gir-1.0/UPowerGlib-1.0.gir
 
 %files dev
 %defattr(-,root,root,-)
@@ -154,6 +157,7 @@ mv %{buildroot}/etc/UPower %{buildroot}/usr/share/. && mv %{buildroot}/etc/dbus-
 /usr/include/libupower-glib/up-wakeups.h
 /usr/include/libupower-glib/upower.h
 /usr/lib64/*.so
+/usr/lib64/girepository-1.0/UPowerGlib-1.0.typelib
 /usr/lib64/pkgconfig/*.pc
 
 %files lib
