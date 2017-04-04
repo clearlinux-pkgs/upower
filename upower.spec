@@ -4,15 +4,15 @@
 #
 Name     : upower
 Version  : 0.99.4
-Release  : 7
+Release  : 8
 URL      : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Source0  : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Summary  : UPower is a system daemon for managing power devices
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: upower-bin
-Requires: upower-lib
 Requires: upower-data
+Requires: upower-lib
 Requires: upower-locales
 Requires: upower-config
 BuildRequires : docbook-xml
@@ -107,10 +107,13 @@ locales components for the upower package.
 %patch1 -p1
 
 %build
+export LANG=C
+export SOURCE_DATE_EPOCH=1491327737
 %configure --disable-static --disable-man-pages
 make V=1  %{?_smp_mflags}
 
 %install
+export SOURCE_DATE_EPOCH=1491327737
 rm -rf %{buildroot}
 %make_install
 %find_lang upower
@@ -135,6 +138,7 @@ mv %{buildroot}/etc/UPower %{buildroot}/usr/share/. && mv %{buildroot}/etc/dbus-
 
 %files data
 %defattr(-,root,root,-)
+/usr/lib64/girepository-1.0/UPowerGlib-1.0.typelib
 /usr/share/UPower/UPower.conf
 /usr/share/dbus-1/interfaces/org.freedesktop.UPower.Device.xml
 /usr/share/dbus-1/interfaces/org.freedesktop.UPower.KbdBacklight.xml
@@ -142,7 +146,7 @@ mv %{buildroot}/etc/UPower %{buildroot}/usr/share/. && mv %{buildroot}/etc/dbus-
 /usr/share/dbus-1/interfaces/org.freedesktop.UPower.xml
 /usr/share/dbus-1/system-services/org.freedesktop.UPower.service
 /usr/share/dbus-1/system.d/org.freedesktop.UPower.conf
-/usr/share/gir-1.0/UPowerGlib-1.0.gir
+/usr/share/gir-1.0/*.gir
 
 %files dev
 %defattr(-,root,root,-)
@@ -156,14 +160,14 @@ mv %{buildroot}/etc/UPower %{buildroot}/usr/share/. && mv %{buildroot}/etc/dbus-
 /usr/include/libupower-glib/up-wakeup-item.h
 /usr/include/libupower-glib/up-wakeups.h
 /usr/include/libupower-glib/upower.h
-/usr/lib64/*.so
-/usr/lib64/girepository-1.0/UPowerGlib-1.0.typelib
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libupower-glib.so
+/usr/lib64/pkgconfig/upower-glib.pc
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libupower-glib.so.3
+/usr/lib64/libupower-glib.so.3.0.1
 
-%files locales -f upower.lang 
+%files locales -f upower.lang
 %defattr(-,root,root,-)
 
