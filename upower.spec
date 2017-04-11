@@ -4,7 +4,7 @@
 #
 Name     : upower
 Version  : 0.99.4
-Release  : 8
+Release  : 9
 URL      : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Source0  : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Summary  : UPower is a system daemon for managing power devices
@@ -108,12 +108,16 @@ locales components for the upower package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1491327737
+export SOURCE_DATE_EPOCH=1491879062
+export CFLAGS="$CFLAGS -Os -ffunction-sections -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -Os -ffunction-sections -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -Os -ffunction-sections -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -Os -ffunction-sections -fno-semantic-interposition "
 %configure --disable-static --disable-man-pages
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1491327737
+export SOURCE_DATE_EPOCH=1491879062
 rm -rf %{buildroot}
 %make_install
 %find_lang upower
