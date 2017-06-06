@@ -4,7 +4,7 @@
 #
 Name     : upower
 Version  : 0.99.4
-Release  : 10
+Release  : 11
 URL      : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Source0  : https://upower.freedesktop.org/releases/upower-0.99.4.tar.xz
 Summary  : UPower is a system daemon for managing power devices
@@ -32,6 +32,9 @@ BuildRequires : pkgconfig(libusb-1.0)
 BuildRequires : pkgconfig(systemd)
 BuildRequires : pkgconfig(udev)
 BuildRequires : systemd-dev
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 Patch1: 0001-Support-an-entirely-stateless-configuration.patch
 
 %description
@@ -107,17 +110,20 @@ locales components for the upower package.
 %patch1 -p1
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1491879062
-export CFLAGS="$CFLAGS -Os -ffunction-sections -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -Os -ffunction-sections -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -Os -ffunction-sections -fno-semantic-interposition "
-export CXXFLAGS="$CXXFLAGS -Os -ffunction-sections -fno-semantic-interposition "
+export SOURCE_DATE_EPOCH=1496773450
+export CFLAGS="-O1 -fdata-sections -ffunction-sections -fno-semantic-interposition "
+export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
+export FFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
+export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 %configure --disable-static --disable-man-pages
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1491879062
+export SOURCE_DATE_EPOCH=1496773450
 rm -rf %{buildroot}
 %make_install
 %find_lang upower
