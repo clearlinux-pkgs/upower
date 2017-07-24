@@ -3,3 +3,4 @@
 # undesirable. One name per line, no whitespace.
 #
 libimobiledevice-1.0
+libplist
