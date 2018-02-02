@@ -4,7 +4,7 @@
 #
 Name     : upower
 Version  : 0.99.7
-Release  : 14
+Release  : 15
 URL      : https://upower.freedesktop.org/releases/upower-0.99.7.tar.xz
 Source0  : https://upower.freedesktop.org/releases/upower-0.99.7.tar.xz
 Summary  : UPower is a system daemon for managing power devices
