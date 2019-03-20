@@ -1,0 +1,11 @@
+--- upower-0.99.10/libupower-glib/up-client.c~	2019-02-20 13:18:49.000000000 +0000
++++ upower-0.99.10/libupower-glib/up-client.c	2019-03-20 15:05:38.152234696 +0000
+@@ -242,6 +242,8 @@
+ gboolean
+ up_client_get_lid_is_present (UpClient *client)
+ {
++	if (!UP_IS_CLIENT (client))
++		return FALSE;
+ 	g_return_val_if_fail (UP_IS_CLIENT (client), FALSE);
+ 	return up_exported_daemon_get_lid_is_present (client->priv->proxy);
+ }
