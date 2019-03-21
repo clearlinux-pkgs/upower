@@ -4,7 +4,7 @@
 #
 Name     : upower
 Version  : 0.99.10
-Release  : 18
+Release  : 19
 URL      : https://gitlab.freedesktop.org/upower/upower/uploads/c438511024b9bc5a904f8775cfc8e4c4/upower-0.99.10.tar.xz
 Source0  : https://gitlab.freedesktop.org/upower/upower/uploads/c438511024b9bc5a904f8775cfc8e4c4/upower-0.99.10.tar.xz
 Summary  : Abstraction for enumerating power devices, listening to device events and querying history and statistics
@@ -41,6 +41,7 @@ BuildRequires : systemd-dev
 %define debug_package %{nil}
 Patch1: 0001-Support-an-entirely-stateless-configuration.patch
 Patch2: assert.patch
+Patch3: serv.patch
 
 %description
 ===============
@@ -144,13 +145,14 @@ services components for the upower package.
 %setup -q -n upower-0.99.10
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1553094423
+export SOURCE_DATE_EPOCH=1553186608
 export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic-interposition "
@@ -160,7 +162,7 @@ export CXXFLAGS="$CXXFLAGS -Os -fdata-sections -ffunction-sections -fno-semantic
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1553094423
+export SOURCE_DATE_EPOCH=1553186608
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/upower
 cp COPYING %{buildroot}/usr/share/package-licenses/upower/COPYING
