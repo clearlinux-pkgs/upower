@@ -20,7 +20,7 @@ index 2a17f30..ad7f0c1 100644
 +	gchar *filename = NULL;
 +	gchar *paths[3] = { 0 };
  
- 	config->priv = UP_CONFIG_GET_PRIVATE (config);
+ 	config->priv = up_config_get_instance_private (config);
  	config->priv->keyfile = g_key_file_new ();
  
 -	filename = g_strdup (g_getenv ("UPOWER_CONF_FILE_NAME"));

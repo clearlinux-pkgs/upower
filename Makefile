@@ -1,5 +1,5 @@
 PKG_NAME := upower
-URL = https://gitlab.freedesktop.org/upower/upower/uploads/c438511024b9bc5a904f8775cfc8e4c4/upower-0.99.10.tar.xz
+URL = https://gitlab.freedesktop.org/upower/upower/-/archive/UPOWER_0_99_11/upower-UPOWER_0_99_11.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
