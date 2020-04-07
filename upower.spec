@@ -4,7 +4,7 @@
 #
 Name     : upower
 Version  : 0.99.11
-Release  : 21
+Release  : 22
 URL      : https://gitlab.freedesktop.org/upower/upower/-/archive/UPOWER_0_99_11/upower-UPOWER_0_99_11.tar.gz
 Source0  : https://gitlab.freedesktop.org/upower/upower/-/archive/UPOWER_0_99_11/upower-UPOWER_0_99_11.tar.gz
 Summary  : UPower is a system daemon for managing power devices
@@ -141,6 +141,7 @@ services components for the upower package.
 
 %prep
 %setup -q -n upower-UPOWER_0_99_11
+cd %{_builddir}/upower-UPOWER_0_99_11
 %patch1 -p1
 %patch2 -p1
 
@@ -149,23 +150,23 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570201195
+export SOURCE_DATE_EPOCH=1586219665
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -Os -fdata-sections -ffat-lto-objects -ffunction-sections -flto=4 -fno-semantic-interposition "
 %autogen --disable-static --disable-man-pages
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1570201195
+export SOURCE_DATE_EPOCH=1586219665
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/upower
-cp COPYING %{buildroot}/usr/share/package-licenses/upower/COPYING
+cp %{_builddir}/upower-UPOWER_0_99_11/COPYING %{buildroot}/usr/share/package-licenses/upower/9e010b11705daec7ebf9c01a32d6f09ee444968d
 %make_install
 %find_lang upower
 ## install_append content
@@ -224,7 +225,7 @@ mv %{buildroot}/etc/UPower %{buildroot}/usr/share/. && mv %{buildroot}/etc/dbus-
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/upower/COPYING
+/usr/share/package-licenses/upower/9e010b11705daec7ebf9c01a32d6f09ee444968d
 
 %files services
 %defattr(-,root,root,-)
