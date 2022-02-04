@@ -1,1 +1,2 @@
---disable-man-pages
+-Dman=false
+-Dgtk-doc=false

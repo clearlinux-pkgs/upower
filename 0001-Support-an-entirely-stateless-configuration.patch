@@ -39,7 +39,7 @@ index 2a17f30..ad7f0c1 100644
 -		g_error_free (error);
 +	paths[0] = g_strdup (g_getenv ("UPOWER_CONF_FILE_NAME"));
 +	paths[1] = g_build_filename (PACKAGE_SYSCONF_DIR, "UPower", "UPower.conf", NULL);
-+	paths[2] = g_build_filename (PACKAGE_DATA_DIR, "UPower", "UPower.conf", NULL);
++	paths[2] = g_build_filename ("/usr/share/upower/", "UPower", "UPower.conf", NULL);
 +
 +	for (int i = 0; i < 3; i++) {
 +		filename = paths[i];
