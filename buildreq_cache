@@ -1,5 +1,4 @@
-0.99.17
-gtk-doc
+0.99.19
 libgudev-dev
 libxslt-bin
 pkgconfig(gudev-1.0)
