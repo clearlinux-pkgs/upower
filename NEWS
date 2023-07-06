@@ -1,3 +1,37 @@
+Version 1.90.2
+--------------
+Released: 2023-07-06
+
+Note that this is the last release of UPower with lid handling. OS components
+that rely on the lid status should get it from logind instead. See:
+https://www.freedesktop.org/software/systemd/man/org.freedesktop.login1.html
+
+- Fix wireless devices not disappearing from Settings when disconnected
+- Require a newer libgudev to avoid bugs related to newline stripping
+  when reading sysfs attributes
+- Add installed-tests files for use with gnome-desktop-testing
+- Fix integration test to work with system installed upower binary and
+  under jhbuild
+
+Version 1.90.1
+--------------
+Released: 2023-07-04
+
+- Detect headsets with kernel batteries such as Logitech and
+  Steelseries headsets, and make them automatically disappear if
+  the headset is turned off (if the kernel driver supports the
+  wireless_status attribute)
+- Hide duplicate Logitech Bluetooth devices (Bolt-compatible devices
+  connected through Bluetooth would show as 2 batteries)
+- Hide duplicate Logitech wireless devices when they get connected
+  through USB as well
+- Fix Bluetooth device names not synchronising, and use user-chosen
+  names when available
+- Handle the "present" sysfs attribute changing
+- Fix iDevices not appearing
+- Fix reading capacity_level with newer libgudev
+- Fix OpenBSD backend
+
 Version 1.90.0
 --------------
 Released: 2022-07-21
