@@ -1,4 +1,5 @@
-1.90.2
+1.90.4
 libgudev-dev
 libxslt-bin
 pkgconfig(gudev-1.0)
+pypi(packaging)
