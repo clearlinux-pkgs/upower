@@ -21,6 +21,9 @@ option('udevhwdbdir',
 option('historydir',
        type : 'string',
        description : 'Directory for upower history files will be stored')
+option('statedir',
+       type : 'string',
+       description : 'Directory for upower status files will be stored')
 option('systemdsystemunitdir',
        type : 'string',
        description : 'Directory for systemd service files ("no" to disable)')
@@ -33,3 +36,11 @@ option('idevice',
        type : 'feature',
        value : 'auto',
        description : 'Build with libimobiledevice')
+option('polkit',
+       type: 'feature',
+       value: 'auto',
+       description: 'PolKit support in daemon')
+option('zshcompletiondir',
+       type: 'string',
+       value: '',
+       description: 'Directory for zsh completion scripts ["no" disables]')

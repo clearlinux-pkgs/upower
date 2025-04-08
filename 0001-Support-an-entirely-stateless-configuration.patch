@@ -1,23 +1,25 @@
-From c4407898217d185d83e278ce18d5f2c40c144042 Mon Sep 17 00:00:00 2001
+From aca322f9a8cd543203c8615877e945b7c2524522 Mon Sep 17 00:00:00 2001
 From: Ikey Doherty <michael.i.doherty@intel.com>
 Date: Mon, 7 Mar 2016 09:38:18 +0000
 Subject: [PATCH] Support an entirely stateless configuration
 
 Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
 ---
- src/up-config.c | 46 ++++++++++++++++++++++++++++++----------------
- 1 file changed, 30 insertions(+), 16 deletions(-)
+ src/up-config.c | 49 ++++++++++++++++++++++++++++++++++---------------
+ 1 file changed, 34 insertions(+), 15 deletions(-)
 
 diff --git a/src/up-config.c b/src/up-config.c
-index 2a17f30..ad7f0c1 100644
+index c80105f..ffa0e17 100644
 --- a/src/up-config.c
 +++ b/src/up-config.c
-@@ -99,28 +99,42 @@ up_config_init (UpConfig *config)
+@@ -112,27 +112,39 @@ up_config_init (UpConfig *config)
  {
- 	gboolean ret;
- 	GError *error = NULL;
--	gchar *filename;
+ 	gboolean allow_risky_critical_action = FALSE;
+ 	g_autofree gchar *critical_action = NULL;
+-	GError *error = NULL;
+-	g_autofree gchar *filename = NULL;
 +	gchar *filename = NULL;
+ 	gboolean ret;
 +	gchar *paths[3] = { 0 };
  
  	config->priv = up_config_get_instance_private (config);
@@ -26,7 +28,10 @@ index 2a17f30..ad7f0c1 100644
 -	filename = g_strdup (g_getenv ("UPOWER_CONF_FILE_NAME"));
 -	if (filename == NULL)
 -		filename = g_build_filename (PACKAGE_SYSCONF_DIR,"UPower", "UPower.conf", NULL);
--
++	paths[0] = g_strdup (g_getenv ("UPOWER_CONF_FILE_NAME"));
++	paths[1] = g_build_filename (PACKAGE_SYSCONF_DIR, "UPower", "UPower.conf", NULL);
++	paths[2] = g_build_filename ("/usr/share/", "UPower", "UPower.conf", NULL);
+ 
 -	/* load */
 -	ret = g_key_file_load_from_file (config->priv->keyfile,
 -					 filename,
@@ -37,15 +42,13 @@ index 2a17f30..ad7f0c1 100644
 -		g_warning ("failed to load config file '%s': %s",
 -			   filename, error->message);
 -		g_error_free (error);
-+	paths[0] = g_strdup (g_getenv ("UPOWER_CONF_FILE_NAME"));
-+	paths[1] = g_build_filename (PACKAGE_SYSCONF_DIR, "UPower", "UPower.conf", NULL);
-+	paths[2] = g_build_filename ("/usr/share/upower/", "UPower", "UPower.conf", NULL);
-+
 +	for (int i = 0; i < 3; i++) {
++		GError *error = NULL;
 +		filename = paths[i];
 +		if (!filename) {
 +			continue;
 +		}
++		g_warning("Trying to load config file '%s'", filename);
 +		ret = g_key_file_load_from_file (config->priv->keyfile,
 +						 filename,
 +						 G_KEY_FILE_NONE,
@@ -57,11 +60,18 @@ index 2a17f30..ad7f0c1 100644
 +			}
 +			g_error_free(error);
 +		}
-+		/* Found a valid configuration */
-+		break;
++		else {
++			/* Found a valid configuration */
++			break;
++		}
  	}
  
--	g_free (filename);
+ 	/* Warn for any dangerous configurations */
+@@ -153,6 +165,13 @@ up_config_init (UpConfig *config)
+ 				   " risky settings.", critical_action);
+ 		}
+ 	}
++
 +	/* Free paths */
 +	for (int i = 0; i < 3; i++) {
 +		if (paths[i]) {
@@ -72,5 +82,5 @@ index 2a17f30..ad7f0c1 100644
  
  /**
 -- 
-2.7.1
+2.49.0
 

@@ -1,3 +1,41 @@
+Version 1.90.8
+--------------
+Released: 2025-03-31
+
+- Fix the incorrect percentage value of a removed battery. (#292) (!246)
+- Fix device type for the gaming device. (#296 #295) (!247)
+- Determine the battery discharging status when connecting a low-power charger. (#276) (!244)
+- Fix memory leak when refreshing battery info. (#305) (!261)
+- Fix memory leak when getting device id. (!261)
+
+Version 1.90.7
+--------------
+Released: 2025-01-09
+
+- Find the correct parent id for input devices. (#268 #286)
+- Fix race condition in test_sibling_priority_no_overwrite. (!240)
+- Show charge-threshold-* status as yes/no. (!242)
+- Add zsh-completions for CLI. (!241)
+- Fix integration test. Extend the daemon stopping timeout to 10sec (#290)
+- Added pre-commit test and fixed code spelling, markdown, and code style issues. (!248)
+
+Version 1.90.6
+--------------
+Released: 2024-09-18
+
+- Fractional battery percentage (!226)
+- CI enhancement. (!236)
+- Tweak the default battery charging threshold to 75-80. (!234)
+- Fix g_object_weak_ref: assertion 'g_atomic_int_get (&object->ref_count) >= 1' failed (#281, !233)
+
+Version 1.90.5
+--------------
+Released: 2024-08-22
+
+- Suspend and Ignore as the CriticalPowerActions (!218 and !218)
+- Support for battery charging threshold (!208)
+- Tweak the device priority to make sure the device kind joystick can be correctly shown. (#267)
+
 Version 1.90.4
 --------------
 Released: 2024-04-08
@@ -48,7 +86,7 @@ Released: 2023-07-04
   connected through Bluetooth would show as 2 batteries)
 - Hide duplicate Logitech wireless devices when they get connected
   through USB as well
-- Fix Bluetooth device names not synchronising, and use user-chosen
+- Fix Bluetooth device names not synchronizing, and use user-chosen
   names when available
 - Handle the "present" sysfs attribute changing
 - Fix iDevices not appearing
@@ -614,7 +652,7 @@ Bugfixes:
  - Depend on stable GUdev API (Michael Biebl)
  - Drop devkit and devkit-power-daemon symlinks (Michael Biebl)
  - Fix bitmap check in the input code (Arnaud Patard)
- - Honour ACLOCAL_FLAGS in Makefile.am (Richard Hughes)
+ - Honor ACLOCAL_FLAGS in Makefile.am (Richard Hughes)
 
 Version 0.9.8
 ~~~~~~~~~~~~~
@@ -834,7 +872,7 @@ Bugfixes:
  - Update the list of HID UPS (Arnaud Quette)
  - Use a gdouble for percentage to fix on-battery reporting (Byron Clark)
  - Bug 24262 – incorrect battery recall warning for Lenovo T61 (Martin Pitt)
- - Fix the toshiba battery recal notices by matching up the double quotes (Richard Hughes)
+ - Fix the toshiba battery recall notices by matching up the double quotes (Richard Hughes)
  - Avoid going from discharging to pending-discharge when the expansion battery
    is very low (Richard Hughes)
  - Some vendors fill the NVRAM full of junk. Don't crash the daemon if the
@@ -973,7 +1011,7 @@ Bugfixes:
  - Remove the 0x prefix from some rule matches (Ronald)
  - Allow all DBus properties to be read with the new DBus (Richard Hughes)
  - Only reset the update-time if the read was successful (Richard Hughes)
- - Optimise the udev rules to skip non-usb devices (Richard Hughes)
+ - Optimize the udev rules to skip non-usb devices (Richard Hughes)
  - Ensure we get properties on devices correctly that have not yet been changed (Richard Hughes)
  - Make the suspend and hibernate scripts execute synchronously. Fixes rh#497563 (Richard Hughes)
  - Ignore method timeouts when we suspend and hibernate (Richard Hughes)
@@ -1003,7 +1041,7 @@ New Features:
  - Get rid of internal Object and instead use the GObject property system (Richard Hughes)
  - Move the library directory from libdevkit-power to devkit-power-gobject (Richard Hughes)
  - Ship a shared library. There are now three external projects using copies of
-   this, which is rediculous (Richard Hughes)
+   this, which is ridiculous (Richard Hughes)
  - Require I_KNOW_THE_DEVICEKIT_POWER_API_IS_SUBJECT_TO_CHANGE (Richard Hughes)
 
 Bugfixes:
