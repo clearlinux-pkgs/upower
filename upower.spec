@@ -6,10 +6,10 @@
 # autospec commit: a88ffdc
 #
 Name     : upower
-Version  : 1.90.8
-Release  : 36
-URL      : https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.8/upower-v1.90.8.tar.gz
-Source0  : https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.8/upower-v1.90.8.tar.gz
+Version  : 1.90.9
+Release  : 37
+URL      : https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.9/upower-v1.90.9.tar.gz
+Source0  : https://gitlab.freedesktop.org/upower/upower/-/archive/v1.90.9/upower-v1.90.9.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -144,12 +144,12 @@ tests components for the upower package.
 
 
 %prep
-%setup -q -n upower-v1.90.8
-cd %{_builddir}/upower-v1.90.8
+%setup -q -n upower-v1.90.9
+cd %{_builddir}/upower-v1.90.9
 %patch -P 1 -p1
 %patch -P 2 -p1
 pushd ..
-cp -a upower-v1.90.8 buildavx2
+cp -a upower-v1.90.9 buildavx2
 popd
 
 %build
@@ -157,7 +157,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1744142804
+export SOURCE_DATE_EPOCH=1744725545
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
